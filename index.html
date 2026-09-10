@@ -30,6 +30,7 @@
   --display:'Cormorant Garamond','Iowan Old Style',Georgia,'Times New Roman',serif;
   --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   --maxw:1080px;
+  --ease:cubic-bezier(.16,.84,.28,1);
 }
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-snap-type:y proximity;scroll-padding-top:64px;}
@@ -239,10 +240,31 @@ h2{font-family:var(--display);font-weight:700;font-size:clamp(26px,4.4vw,48px);l
 footer{padding:34px 0;text-align:center;color:var(--ink-faint);font-size:13.5px;}
 footer .sep{color:var(--line);margin:0 10px;}
 
-/* reveal */
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease;}
-.reveal.in{opacity:1;transform:none;}
-@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}.btn:hover,.metric:hover,.vcard:hover{transform:none;}}
+/* scroll progress line */
+.progress{position:fixed;top:0;left:0;height:2px;width:0;z-index:70;
+  background:linear-gradient(90deg,var(--gold),var(--gold-soft));
+  box-shadow:0 0 12px rgba(201,162,75,.5);}
+
+/* choreographed reveals */
+.reveal{opacity:0;transform:translateY(38px) scale(.985);filter:blur(7px);
+  transition:opacity 1s var(--ease),transform 1s var(--ease),filter 1s var(--ease);will-change:opacity,transform,filter;}
+.reveal.in{opacity:1;transform:none;filter:none;}
+
+/* hero entrance on load */
+@keyframes riseIn{from{opacity:0;transform:translateY(26px);filter:blur(7px);}to{opacity:1;transform:none;filter:none;}}
+@keyframes fadeIn{from{opacity:0;filter:blur(10px);}to{opacity:1;filter:none;}}
+.hero-text .eyebrow{animation:riseIn .85s var(--ease) both;}
+.hero-text h1{animation:riseIn .95s var(--ease) .10s both;}
+.hero-text .lede{animation:riseIn .95s var(--ease) .22s both;}
+.hero-text .cta{animation:riseIn .95s var(--ease) .34s both;}
+.hero-photo{animation:fadeIn 1.15s var(--ease) .18s both;}
+
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;filter:none;transition:none;}
+  .hero-text .eyebrow,.hero-text h1,.hero-text .lede,.hero-text .cta,.hero-photo{animation:none;}
+  .btn:hover,.metric:hover,.vcard:hover{transform:none;}
+  .progress{display:none;}
+}
 </style>
 </head>
 <body>
@@ -259,6 +281,9 @@ footer .sep{color:var(--line);margin:0 10px;}
     </div>
   </div>
 </nav>
+
+<noscript><style>.reveal{opacity:1!important;transform:none!important;filter:none!important;}.hero-text .eyebrow,.hero-text h1,.hero-text .lede,.hero-text .cta,.hero-photo{animation:none!important;}</style></noscript>
+<div class="progress" id="progress" aria-hidden="true"></div>
 
 <nav class="dotnav" aria-label="Jump to section">
   <a href="#top" class="active"><span class="lbl">Top</span></a>
@@ -475,24 +500,50 @@ footer .sep{color:var(--line);margin:0 10px;}
 
 <script>
 document.getElementById('yr').textContent=new Date().getFullYear();
-const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const RM=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 
-// dot navigator scroll-spy (scroll-position based for reliability)
+// choreographed reveals with per-row stagger
+const revs=[...document.querySelectorAll('.reveal')];
+if(('IntersectionObserver' in window) && !RM){
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{
+    if(e.isIntersecting){
+      const el=e.target;
+      const sibs=[...el.parentElement.children].filter(c=>c.classList.contains('reveal'));
+      const idx=Math.max(sibs.indexOf(el),0);
+      el.style.transitionDelay=(Math.min(idx,6)*0.075)+'s';
+      el.classList.add('in');
+      io.unobserve(el);
+    }
+  });},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+  revs.forEach(el=>io.observe(el));
+}else{
+  revs.forEach(el=>el.classList.add('in'));
+}
+
+// unified scroll frame: progress line + hero parallax + dot scroll-spy
 const dotEls=[...document.querySelectorAll('.dotnav a')];
 const secList=dotEls.map(a=>({a,el:document.getElementById(a.getAttribute('href').slice(1))})).filter(o=>o.el);
-function updateSpy(){
+const progress=document.getElementById('progress');
+const heroPhoto=document.querySelector('.hero-photo');
+const heroText=document.querySelector('.hero-text');
+function frame(){
   const sc=document.scrollingElement||document.documentElement;
-  const centre=sc.scrollTop+window.innerHeight*0.4;
-  let cur=secList[0];
+  const y=sc.scrollTop, vh=window.innerHeight;
+  const max=sc.scrollHeight-vh;
+  if(progress) progress.style.width=(max>0?Math.min(Math.max(y/max*100,0),100):0)+'%';
+  if(!RM && y<vh*1.4){
+    if(heroPhoto) heroPhoto.style.transform='translateY('+(y*0.10)+'px) scale('+(1+Math.min(y/5000,0.035))+')';
+    if(heroText) heroText.style.transform='translateY('+(y*-0.045)+'px)';
+  }
+  const centre=y+vh*0.4; let cur=secList[0];
   for(const o of secList){ if(o.el.offsetTop<=centre) cur=o; }
-  dotEls.forEach(a=>a.classList.remove('active'));
-  cur.a.classList.add('active');
+  dotEls.forEach(a=>a.classList.remove('active')); if(cur) cur.a.classList.add('active');
 }
-let ticking=false;
-window.addEventListener('scroll',()=>{ if(!ticking){ticking=true;requestAnimationFrame(()=>{updateSpy();ticking=false;});} },{passive:true});
-window.addEventListener('resize',updateSpy,{passive:true});
-updateSpy();
+let tick=false;
+function onScroll(){ if(!tick){tick=true;requestAnimationFrame(()=>{frame();tick=false;});} }
+window.addEventListener('scroll',onScroll,{passive:true});
+window.addEventListener('resize',onScroll,{passive:true});
+frame();
 </script>
 </body>
 </html>
