@@ -32,7 +32,8 @@
   --maxw:1080px;
 }
 *{box-sizing:border-box;}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-snap-type:y proximity;scroll-padding-top:64px;}
+@media(prefers-reduced-motion:reduce){html{scroll-snap-type:none;scroll-behavior:auto;}}
 body{
   margin:0;background:var(--bg);color:var(--ink);
   font-family:var(--sans);font-size:17px;line-height:1.65;
@@ -133,6 +134,16 @@ h1{
 
 /* ---------- sections ---------- */
 section{padding:clamp(64px,10vw,110px) 0;border-bottom:1px solid var(--line-soft);}
+header,section{scroll-snap-align:start;}
+
+/* ---------- dot navigator ---------- */
+.dotnav{position:fixed;right:20px;top:50%;transform:translateY(-50%);z-index:60;display:flex;flex-direction:column;gap:15px;}
+.dotnav a{position:relative;width:11px;height:11px;border-radius:50%;border:1.5px solid var(--ink-faint);display:block;transition:transform .25s,background .25s,border-color .25s;}
+.dotnav a:hover{border-color:var(--gold);}
+.dotnav a.active{background:var(--gold);border-color:var(--gold);transform:scale(1.35);}
+.dotnav a .lbl{position:absolute;right:24px;top:50%;transform:translateY(-50%);white-space:nowrap;font-family:var(--sans);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);background:var(--panel);border:1px solid var(--line);padding:5px 10px;border-radius:5px;opacity:0;pointer-events:none;transition:opacity .2s;}
+.dotnav a:hover .lbl{opacity:1;}
+@media(max-width:560px){.dotnav{right:11px;gap:12px;}.dotnav a{width:9px;height:9px;}.dotnav a .lbl{display:none;}}
 .sec-eyebrow{font-size:12.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:18px;}
 h2{font-family:var(--display);font-weight:700;font-size:clamp(26px,4.4vw,48px);line-height:1.06;letter-spacing:-.015em;margin:0 0 30px;white-space:nowrap;}
 .prose{font-size:clamp(17px,2vw,19.5px);color:var(--ink-soft);max-width:62ch;line-height:1.72;}
@@ -249,7 +260,18 @@ footer .sep{color:var(--line);margin:0 10px;}
   </div>
 </nav>
 
-<header>
+<nav class="dotnav" aria-label="Jump to section">
+  <a href="#top" class="active"><span class="lbl">Top</span></a>
+  <a href="#about"><span class="lbl">About</span></a>
+  <a href="#impact"><span class="lbl">Milestones</span></a>
+  <a href="#experience"><span class="lbl">Experience</span></a>
+  <a href="#ventures"><span class="lbl">Life Projects</span></a>
+  <a href="#credentials"><span class="lbl">Education</span></a>
+  <a href="#interests"><span class="lbl">Curious</span></a>
+  <a href="#contact"><span class="lbl">Contact</span></a>
+</nav>
+
+<header id="top">
   <div class="wrap">
     <div class="hero-grid">
       <div class="hero-text">
@@ -455,6 +477,22 @@ footer .sep{color:var(--line);margin:0 10px;}
 document.getElementById('yr').textContent=new Date().getFullYear();
 const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// dot navigator scroll-spy (scroll-position based for reliability)
+const dotEls=[...document.querySelectorAll('.dotnav a')];
+const secList=dotEls.map(a=>({a,el:document.getElementById(a.getAttribute('href').slice(1))})).filter(o=>o.el);
+function updateSpy(){
+  const sc=document.scrollingElement||document.documentElement;
+  const centre=sc.scrollTop+window.innerHeight*0.4;
+  let cur=secList[0];
+  for(const o of secList){ if(o.el.offsetTop<=centre) cur=o; }
+  dotEls.forEach(a=>a.classList.remove('active'));
+  cur.a.classList.add('active');
+}
+let ticking=false;
+window.addEventListener('scroll',()=>{ if(!ticking){ticking=true;requestAnimationFrame(()=>{updateSpy();ticking=false;});} },{passive:true});
+window.addEventListener('resize',updateSpy,{passive:true});
+updateSpy();
 </script>
 </body>
 </html>
