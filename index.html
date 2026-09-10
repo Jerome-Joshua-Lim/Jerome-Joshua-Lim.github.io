@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jerome Joshua Lim · Build. Learn. Repeat.</title>
+<meta name="description" content="Jerome Joshua Lim. Build. Learn. Repeat. A strategist and builder: fourteen years of strategic leadership in the Singapore Armed Forces, an SMU Master of Entrepreneurship and Innovation (top of cohort), and ventures of his own in coaching and wine.">
+<meta property="og:title" content="Jerome Joshua Lim · Build. Learn. Repeat.">
+<meta property="og:description" content="A strategist and builder, turning strategy and curiosity into ventures that matter.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2312100e'/%3E%3Ctext x='50%25' y='54%25' font-family='Georgia,serif' font-size='30' font-weight='700' fill='%23c9a24b' text-anchor='middle' dominant-baseline='middle'%3EJ%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#12100e;
+  --bg-2:#181511;
+  --panel:#1c1813;
+  --panel-2:#221d17;
+  --ink:#f2ece1;
+  --ink-soft:#c8bfae;
+  --ink-faint:#8c8271;
+  --gold:#c9a24b;
+  --gold-soft:#e0c483;
+  --green:#4a7d6b;
+  --green-deep:#1b2e2a;
+  --line:rgba(242,236,225,.10);
+  --line-soft:rgba(242,236,225,.055);
+  --display:'Cormorant Garamond','Iowan Old Style',Georgia,'Times New Roman',serif;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --maxw:1080px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-size:17px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+::selection{background:var(--gold);color:#1a140b;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+
+/* ---------- nav ---------- */
+nav{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(12px);background:rgba(18,16,14,.72);
+  border-bottom:1px solid var(--line-soft);
+}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;}
+.brand{font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:.2px;}
+.brand span{color:var(--gold);}
+.navlinks{display:flex;gap:30px;font-size:14.5px;font-weight:500;color:var(--ink-soft);}
+.navlinks a{transition:color .2s;}
+.navlinks a:hover{color:var(--gold);}
+@media(max-width:720px){.navlinks{display:none;}}
+
+/* ---------- hero ---------- */
+header{
+  position:relative;padding:clamp(70px,13vw,150px) 0 clamp(60px,9vw,110px);
+  background:
+    radial-gradient(1000px 520px at 78% -8%,rgba(201,162,75,.16),transparent 60%),
+    radial-gradient(760px 460px at 6% 105%,rgba(74,125,107,.14),transparent 62%),
+    linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%);
+  border-bottom:1px solid var(--line-soft);
+}
+.hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:clamp(32px,5vw,60px);align-items:center;}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr;}}
+.hero-photo{position:relative;justify-self:center;max-width:420px;width:100%;}
+.hero-photo::before{content:"";position:absolute;inset:-18px -18px -18px -18px;
+  background:radial-gradient(60% 60% at 65% 30%,rgba(201,162,75,.28),transparent 70%);
+  filter:blur(8px);z-index:0;border-radius:28px;}
+.hero-photo img{position:relative;z-index:1;width:100%;border-radius:20px;
+  border:1px solid rgba(201,162,75,.32);box-shadow:0 34px 80px rgba(0,0,0,.55);
+  aspect-ratio:4/5;object-fit:cover;object-position:50% 22%;}
+@media(max-width:860px){.hero-photo{max-width:320px;margin-top:12px;}}
+.eyebrow{
+  font-size:13px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--gold);font-weight:600;margin-bottom:26px;
+}
+h1{
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(52px,9.5vw,116px);line-height:1.0;
+  letter-spacing:0;margin:0 0 26px;
+}
+.lede{
+  font-family:var(--display);font-style:italic;font-weight:500;
+  font-size:clamp(21px,3.1vw,32px);line-height:1.35;
+  color:var(--ink);max-width:20ch;margin:0 0 20px;
+}
+.lede em{color:var(--gold-soft);font-style:italic;}
+.subhead{
+  font-size:clamp(16px,2vw,18.5px);color:var(--ink-soft);
+  max-width:56ch;margin:0 0 38px;
+}
+.cta{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:44px;}
+.btn{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:13px 24px;border-radius:999px;font-size:14.5px;font-weight:600;
+  transition:transform .16s ease,background .2s,border-color .2s,color .2s;
+}
+.btn:hover{transform:translateY(-2px);}
+.btn-primary{background:var(--gold);color:#1a140b;}
+.btn-primary:hover{background:var(--gold-soft);}
+.btn-ghost{border:1px solid var(--line);color:var(--ink);}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+.statrow{
+  display:flex;flex-wrap:wrap;gap:clamp(24px,5vw,54px);
+  margin-top:clamp(44px,6vw,68px);
+  padding-top:34px;border-top:1px solid var(--line-soft);
+}
+.stat .n{font-family:var(--display);font-weight:700;font-size:clamp(26px,4vw,38px);color:var(--gold);line-height:1;}
+.stat .l{font-size:13px;color:var(--ink-faint);margin-top:8px;letter-spacing:.02em;max-width:20ch;}
+
+/* ---------- sections ---------- */
+section{padding:clamp(64px,10vw,110px) 0;border-bottom:1px solid var(--line-soft);}
+.sec-eyebrow{font-size:12.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:18px;}
+h2{font-family:var(--display);font-weight:700;font-size:clamp(30px,4.6vw,50px);line-height:1.04;letter-spacing:-.015em;margin:0 0 30px;max-width:16ch;}
+.prose{font-size:clamp(17px,2vw,19.5px);color:var(--ink-soft);max-width:62ch;line-height:1.72;}
+.prose p{margin:0 0 20px;}
+.prose strong{color:var(--ink);font-weight:600;}
+
+/* ---------- achievements ---------- */
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+@media(max-width:820px){.metrics{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:520px){.metrics{grid-template-columns:1fr;}}
+.metric{
+  background:linear-gradient(160deg,var(--panel),var(--bg-2));
+  border:1px solid var(--line);border-radius:16px;padding:28px 26px;
+  transition:transform .18s ease,border-color .2s;
+}
+.metric:hover{transform:translateY(-4px);border-color:rgba(201,162,75,.4);}
+.metric .big{font-family:var(--display);font-weight:700;font-size:clamp(30px,4vw,42px);color:var(--gold);line-height:1;margin-bottom:12px;}
+.metric .t{font-weight:600;font-size:16px;margin-bottom:6px;}
+.metric .d{font-size:14.5px;color:var(--ink-faint);line-height:1.55;}
+
+/* ---------- timeline ---------- */
+.tl{margin-top:8px;}
+.job{
+  display:grid;grid-template-columns:180px 1fr;gap:28px;
+  padding:30px 0;border-top:1px solid var(--line-soft);
+}
+.job:first-child{border-top:none;}
+@media(max-width:680px){.job{grid-template-columns:1fr;gap:8px;}}
+.job .when{font-size:13.5px;color:var(--ink-faint);font-weight:500;padding-top:4px;letter-spacing:.02em;}
+.job .role{font-family:var(--display);font-weight:600;font-size:21px;margin:0 0 4px;}
+.job .org{font-size:14.5px;color:var(--gold-soft);margin-bottom:14px;font-weight:500;}
+.job ul{margin:0;padding-left:18px;color:var(--ink-soft);font-size:15.5px;line-height:1.62;}
+.job li{margin-bottom:8px;}
+.job li::marker{color:var(--gold);}
+
+/* ---------- ventures ---------- */
+.ventures{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+@media(max-width:760px){.ventures{grid-template-columns:1fr;}}
+.vcard{
+  position:relative;border-radius:20px;padding:34px 32px;overflow:hidden;
+  border:1px solid var(--line);transition:transform .2s ease;
+  display:flex;flex-direction:column;min-height:270px;
+}
+.vcard:hover{transform:translateY(-5px);}
+.vcard.wine{background:linear-gradient(165deg,#1d1013,#160a0c);border-color:rgba(201,162,75,.28);}
+.vcard.coach{background:linear-gradient(165deg,#1e2b27,#14231f);border-color:rgba(122,168,150,.28);}
+.vtag{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;margin-bottom:16px;}
+.wine .vtag{color:var(--gold);}
+.coach .vtag{color:#8fc3ac;}
+.vcard h3{font-family:var(--display);font-weight:700;font-size:27px;margin:0 0 12px;}
+.vcard p{color:var(--ink-soft);font-size:15.5px;line-height:1.6;margin:0 0 22px;flex:1;}
+.vlink{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14.5px;}
+.wine .vlink{color:var(--gold-soft);}
+.coach .vlink{color:#8fc3ac;}
+.vlink .arr{transition:transform .18s;}
+.vcard:hover .arr{transform:translateX(4px);}
+
+/* ---------- credentials ---------- */
+.creds{display:grid;grid-template-columns:1.3fr 1fr;gap:44px;}
+@media(max-width:760px){.creds{grid-template-columns:1fr;gap:32px;}}
+.credblock h4{font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;margin:0 0 18px;}
+.edu-item{padding:16px 0;border-top:1px solid var(--line-soft);}
+.edu-item:first-of-type{border-top:none;}
+.edu-item .deg{font-weight:600;font-size:16px;}
+.edu-item .sch{font-size:14px;color:var(--gold-soft);margin-top:2px;}
+.edu-item .yr{font-size:13px;color:var(--ink-faint);margin-top:2px;}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px;}
+.chip{
+  font-size:13.5px;color:var(--ink-soft);background:var(--panel);
+  border:1px solid var(--line);border-radius:999px;padding:8px 15px;
+}
+.chip b{color:var(--gold);font-weight:600;}
+.cred-list{list-style:none;margin:0 0 30px;padding:0;}
+.cred-list li{font-size:15px;color:var(--ink-soft);padding:11px 0 11px 20px;position:relative;border-top:1px solid var(--line-soft);}
+.cred-list li:first-child{border-top:none;}
+.cred-list li::before{content:"";position:absolute;left:0;top:19px;width:6px;height:6px;border-radius:50%;background:var(--gold);}
+.cred-list b{color:var(--gold);font-weight:600;}
+
+/* ---------- interests ---------- */
+.interests{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+@media(max-width:760px){.interests{grid-template-columns:1fr;}}
+.icard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:26px;}
+.icard .ic{font-size:22px;margin-bottom:12px;}
+.icard h5{font-family:var(--display);font-weight:600;font-size:19px;margin:0 0 8px;}
+.icard p{font-size:14.5px;color:var(--ink-faint);margin:0;line-height:1.55;}
+
+/* ---------- contact ---------- */
+#contact{text-align:center;border-bottom:none;
+  background:radial-gradient(700px 400px at 50% 120%,rgba(201,162,75,.12),transparent 60%);}
+#contact h2{margin:0 auto 22px;max-width:18ch;}
+#contact .prose{margin:0 auto 34px;text-align:center;}
+.contact-cta{display:flex;justify-content:center;flex-wrap:wrap;gap:14px;}
+footer{padding:34px 0;text-align:center;color:var(--ink-faint);font-size:13.5px;}
+footer .sep{color:var(--line);margin:0 10px;}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.in{opacity:1;transform:none;}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}.btn:hover,.metric:hover,.vcard:hover{transform:none;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">Jerome Joshua <span>Lim</span></div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#impact">Impact</a>
+      <a href="#experience">Experience</a>
+      <a href="#ventures">Life Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <div class="eyebrow">Build &nbsp;·&nbsp; Learn &nbsp;·&nbsp; Repeat</div>
+        <h1>Hi, I'm<br>Jerome</h1>
+        <p class="lede">I love building, I love learning. <em>I'm always curious about life.</em></p>
+        <p class="subhead">I've spent more than 20 years in the Singapore Armed Forces accumulating experience in running large scale operations, product and project management, as well as charting strategy and transformation for the organisation. In my career, I've had the privilege to upskill myself. I've completed two Master Degrees, at Florida State University and at Singapore Management University. With luck, I've had the opportunity to intern at a Deep Tech Venture firm and build life projects that I am proud to call my own. Today, I head the Army Safety Technology and Research Office, where I integrate emerging and mature technologies to enhance the safety and well being of over 200,000 people.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#ventures">See what I'm building →</a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/jerome-joshua-lim" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <img src="jerome.jpg" alt="Jerome Joshua Lim" width="840" height="1050" onerror="this.onerror=null;this.src=&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 840 1050'%3E%3Crect width='840' height='1050' fill='%231c1813'/%3E%3Ctext x='50%25' y='47%25' font-family='Georgia,serif' font-size='150' font-weight='700' fill='%23c9a24b' text-anchor='middle'%3EJJL%3C/text%3E%3Ctext x='50%25' y='57%25' font-family='sans-serif' font-size='26' letter-spacing='4' fill='%238c8271' text-anchor='middle'%3EPHOTO GOES HERE%3C/text%3E%3C/svg%3E&quot;">
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-eyebrow">About</div>
+    <h2>Living life, one step at a time.</h2>
+    <div class="prose reveal">
+      <p>I did not start with much. I was working odd jobs by thirteen to help with the finances at home. While I was never the strongest student, I've been blessed to be awarded multiple SAF scholarships. This offered me opportunities for life-long learning, expanded thinking and considered perspectives. I learned early that where you start does not decide where you finish.</p>
+      <p>My twenty years in the SAF have taught me how to be comfortable with ambiguity, gather very different views, and turn them into decisions people could act on. My career did not move in a straight line. While the peaks were pleasant, the troughs were where I've gained the most life lessons.</p>
+      <p>Taking a gap year in 2025 was one of the best decisions of my life. I went all in to rediscover my identity. I completed SMU's <strong>Master of Entrepreneurship and Innovation</strong>, scouted deep-tech deals as a <strong>Venture Creator at Origgin Ventures</strong>, and started my life coaching practice. Now, I'm back to the Singapore Army with renewed purpose, leading the <strong>Army Safety Technology and Research Office</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<section id="impact">
+  <div class="wrap">
+    <div class="sec-eyebrow">Signature impact</div>
+    <h2>Career Milestones</h2>
+    <div class="metrics">
+      <div class="metric reveal"><div class="big">$2M</div><div class="t">Continuation funding secured</div><div class="d">Won multi-year funding to build new simulation models steering the Singapore Army's next five-year strategy.</div></div>
+      <div class="metric reveal"><div class="big">$2B+</div><div class="t">Capability decisions shaped</div><div class="d">Led cross-functional teams whose analysis informed manpower, technology and budget calls worth over SGD $2 billion.</div></div>
+      <div class="metric reveal"><div class="big">$300K</div><div class="t">Deep-tech grant secured</div><div class="d">Won a Singapore-MIT Alliance (SMART) Innovation 2.0 grant for a medical-technology venture as a Venture Creator at Origgin Ventures.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-eyebrow">Experience</div>
+    <h2>The path so far.</h2>
+    <div class="tl">
+      <div class="job reveal">
+        <div class="when">Jul 2026 – Present</div>
+        <div class="jobbody">
+          <div class="role">Head, Army Safety Technology &amp; Research Office</div>
+          <div class="org">Army Safety Inspectorate · Singapore Army</div>
+          <ul>
+            <li>Lead the office harnessing technology and research to make army training and operations safer.</li>
+            <li>Bridge operational realities with emerging technology to shape safety capability and policy.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="job reveal">
+        <div class="when">Dec 2025 – Jun 2026</div>
+        <div class="jobbody">
+          <div class="role">Venture Creator</div>
+          <div class="org">Origgin Ventures · Deep-Tech Venture Capital</div>
+          <ul>
+            <li>Secured a <strong>SGD $300k Singapore-MIT Alliance (SMART) Innovation 2.0 grant</strong> for a medical-technology venture.</li>
+            <li>Architected an agentic-AI platform for technology &amp; market assessment; scouted deals for Origgin Ventures Fund II.</li>
+            <li>Ran due diligence across AI, medtech, agri- and battery technologies; built a venture pipeline with Campus Create, Japan.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="job reveal">
+        <div class="when">Nov 2021 – Aug 2025</div>
+        <div class="jobbody">
+          <div class="role">Deputy Director, Operations Research &amp; Analytics Office</div>
+          <div class="org">Joint Plans and Transformation Department · Singapore Armed Forces</div>
+          <ul>
+            <li>Secured SGD $2M in continuation funding for new simulation models steering the Army's next five-year strategy.</li>
+            <li>Designed modelling &amp; simulation roadmaps supporting SAF transformation; researched global developments to course-correct strategy.</li>
+            <li>Translated optimisation-model outputs into strategic implications across budget decisions worth over SGD $2B, land-space, manpower, equipment and emerging tech.</li>
+            <li>Built partnerships with defence-industry partners (DSO, DSTA) and championed the adoption of Digital Twins for the SAF.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="job reveal">
+        <div class="when">May 2018 – Jan 2021</div>
+        <div class="jobbody">
+          <div class="role">Training &amp; Learning Development Officer</div>
+          <div class="org">HQ Singapore Artillery · Singapore Army</div>
+          <ul>
+            <li>Army lead planner for a four-week multinational exercise in Washington State (Joint Warfare Assessment); built partnerships across six allied militaries (United Kingdom, France, Canada, Australia, New Zealand and America).</li>
+            <li>Designed the Next Generation Artillery Training System for smarter use of land-space and man-hours.</li>
+            <li>Organising secretariat for the 12th ASEAN Defence Ministers' Meeting and the 5th ASEAN Defence Ministers' Meeting-Plus.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="job reveal">
+        <div class="when">Jan 2013 – Jan 2017</div>
+        <div class="jobbody">
+          <div class="role">Battery Commander &amp; Senior Instructor</div>
+          <div class="org">24th Battalion Singapore Artillery · Singapore Army</div>
+          <ul>
+            <li>As Battery Commander, led and developed over 60 soldiers to be operationally ready for the defence of Singapore. Their competence contributed to winning the Best Artillery Unit award.</li>
+            <li>As a Senior Instructor, revamped the Field Artillery Advanced Officers Leadership Course using role-task analysis, cutting instruction man-hours by 20%.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ventures">
+  <div class="wrap">
+    <div class="sec-eyebrow">Life Projects</div>
+    <h2>What I am building.</h2>
+    <div class="ventures">
+      <div class="vcard coach reveal">
+        <div class="vtag">Coach Kai · Life Coaching</div>
+        <h3>Coach Kai</h3>
+        <p>A life-coaching practice in Singapore, built on one idea: everything I coach, I have lived. Clarity, growth, and purpose for people who are ready for change. ICF certified.</p>
+        <a class="vlink" href="https://coachkai.sg" target="_blank" rel="noopener">coachkai.sg <span class="arr">→</span></a>
+      </div>
+      <div class="vcard wine reveal">
+        <div class="vtag">Wine with Kai · Community</div>
+        <h3>Wine with Kai</h3>
+        <p>Small-group wine dinners in Singapore. No more than twelve seats, and no need to be an expert. Come to explore and widen your palate. Backed by WSET Level 1 and 2.</p>
+        <a class="vlink" href="https://wine-with-kai.github.io/index.html" target="_blank" rel="noopener">wine-with-kai.github.io <span class="arr">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="credentials">
+  <div class="wrap">
+    <div class="sec-eyebrow">Credentials</div>
+    <h2>Education &amp; recognition.</h2>
+    <div class="creds">
+      <div class="credblock">
+        <h4>Education</h4>
+        <div class="edu-item"><div class="deg">Master of Science, Entrepreneurship &amp; Innovation, <em>Top Graduate</em></div><div class="sch">Singapore Management University</div><div class="yr">2026</div></div>
+        <div class="edu-item"><div class="deg">Command &amp; Staff Course</div><div class="sch">Goh Keng Swee Command &amp; Staff College · Book Prize</div><div class="yr">2021</div></div>
+        <div class="edu-item"><div class="deg">Master of Science, Instructional Systems &amp; Learning Technologies</div><div class="sch">Florida State University</div><div class="yr">2018</div></div>
+        <div class="edu-item"><div class="deg">Bachelor of Business (Hons), Tourism &amp; Hospitality · Minor in Entrepreneurship</div><div class="sch">Nanyang Technological University</div><div class="yr">2011</div></div>
+        <div class="edu-item"><div class="deg">Diploma in Aeronautical Engineering</div><div class="sch">Singapore Polytechnic</div><div class="yr">2005</div></div>
+      </div>
+      <div class="credblock">
+        <h4>Certifications</h4>
+        <ul class="cred-list">
+          <li><b>WSET</b> Level 1, Wines</li>
+          <li><b>WSET</b> Level 2, Wines &amp; Spirits</li>
+          <li><b>ICF</b> Certified Coach</li>
+          <li>Data Champions, Certified Power User</li>
+        </ul>
+        <h4>Awards &amp; prizes</h4>
+        <ul class="cred-list">
+          <li>SMU MEI, Top Graduate</li>
+          <li>1st Runner-up, MINDEF Data Hackathon</li>
+          <li>Book Prize, GKS-CSC</li>
+          <li>SAF Postgraduate Award</li>
+          <li>SAF Academic Scholarship</li>
+          <li>61/05 Officer Cadet Course, Sword of Merit</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="interests">
+  <div class="wrap">
+    <div class="sec-eyebrow">Beyond work</div>
+    <h2>What keeps me curious.</h2>
+    <div class="interests">
+      <div class="icard reveal"><div class="ic">🍷</div><h5>Wine &amp; whisky</h5><p>WSET trained, with a real love for wine and a multi-year private whisky cask project, including a collaboration with a Singaporean artist.</p></div>
+      <div class="icard reveal"><div class="ic">📷</div><h5>Arts</h5><p>Photography, music, and cooking. The things that keep me curious, playful, and grounded.</p></div>
+      <div class="icard reveal"><div class="ic">📚</div><h5>Reading</h5><p>The more I learn, the less I know. I read to think a little better, from Kahneman and Taleb to Atomic Habits and Thinking in Bets.</p></div>
+      <div class="icard reveal"><div class="ic">💰</div><h5>Dividend investing</h5><p>Building passive income one small block at a time. A simple heuristic turned dividend investing into a game I can keep playing.</p></div>
+      <div class="icard reveal"><div class="ic">🏃</div><h5>Physical fitness</h5><p>Move to live. I run and train through the week, not to impress but to show what consistency can do. Health is a lifestyle for the decades ahead.</p></div>
+      <div class="icard reveal"><div class="ic">🌱</div><h5>Personal growth</h5><p>Learning to think a little better, and defining success on my own terms. The quiet, ongoing practice of becoming.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="sec-eyebrow">Contact</div>
+    <h2>Let's talk.</h2>
+    <p class="prose">Whether it is strategy, a venture, or a good glass of wine, I am always up for a conversation.</p>
+    <div class="contact-cta">
+      <a class="btn btn-primary" href="https://www.linkedin.com/in/jerome-joshua-lim" target="_blank" rel="noopener">Connect on LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    © <span id="yr"></span> Jerome Joshua Lim
+    <span class="sep">·</span> Build. Learn. Repeat.
+    <span class="sep">·</span> Singapore
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent=new Date().getFullYear();
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
