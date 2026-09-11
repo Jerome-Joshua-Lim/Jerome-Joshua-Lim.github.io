@@ -35,6 +35,8 @@
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-snap-type:y proximity;scroll-padding-top:64px;}
 @media(prefers-reduced-motion:reduce){html{scroll-snap-type:none;scroll-behavior:auto;}}
+/* free momentum scroll on touch/mobile (snapping fights iOS momentum) */
+@media (pointer:coarse),(max-width:768px){html{scroll-snap-type:none;}}
 body{
   margin:0;background:var(--bg);color:var(--ink);
   font-family:var(--sans);font-size:17px;line-height:1.65;
@@ -58,7 +60,27 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 .navlinks{display:flex;gap:30px;font-size:14.5px;font-weight:500;color:var(--ink-soft);}
 .navlinks a{transition:color .2s;}
 .navlinks a:hover{color:var(--gold);}
-@media(max-width:720px){.navlinks{display:none;}}
+
+/* mobile menu button (hamburger) */
+.menu-btn{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;margin-right:-10px;background:none;border:none;cursor:pointer;position:relative;z-index:66;}
+.menu-btn span{display:block;width:23px;height:2px;background:var(--ink);margin:0 auto;border-radius:2px;transition:transform .3s var(--ease),opacity .25s;}
+.menu-btn.open span:nth-child(1){transform:translateY(3.5px) rotate(45deg);}
+.menu-btn.open span:nth-child(2){transform:translateY(-3.5px) rotate(-45deg);}
+
+/* full-screen mobile nav overlay */
+.mobile-menu{position:fixed;inset:0;z-index:65;background:rgba(18,16,14,.98);backdrop-filter:blur(16px);
+  display:flex;flex-direction:column;justify-content:center;gap:2px;
+  padding:calc(64px + env(safe-area-inset-top)) 32px env(safe-area-inset-bottom);
+  opacity:0;visibility:hidden;pointer-events:none;transition:opacity .32s var(--ease),visibility .32s;}
+.mobile-menu.open{opacity:1;visibility:visible;pointer-events:auto;}
+.mobile-menu a{font-family:var(--display);font-size:clamp(27px,8.5vw,40px);font-weight:600;color:var(--ink);
+  padding:13px 0;border-bottom:1px solid var(--line-soft);transition:color .2s,transform .3s var(--ease);opacity:0;transform:translateY(14px);}
+.mobile-menu.open a{opacity:1;transform:none;}
+.mobile-menu a:last-child{border-bottom:none;}
+.mobile-menu a .n{color:var(--ink-faint);font-size:.5em;margin-right:14px;font-family:var(--sans);letter-spacing:.05em;}
+
+@media(max-width:768px){.navlinks{display:none;}.menu-btn{display:flex;}}
+@media(min-width:769px){.mobile-menu{display:none;}}
 
 /* ---------- hero ---------- */
 header{
@@ -265,6 +287,11 @@ footer .sep{color:var(--line);margin:0 10px;}
   .btn:hover,.metric:hover,.vcard:hover{transform:none;}
   .progress{display:none;}
 }
+/* mobile/touch: lighter snappier reveals (no costly blur), hide desktop dot rail */
+@media (pointer:coarse),(max-width:768px){
+  .reveal{transform:translateY(20px);filter:none;transition:opacity .55s var(--ease),transform .55s var(--ease);}
+  .dotnav{display:none;}
+}
 </style>
 </head>
 <body>
@@ -279,8 +306,22 @@ footer .sep{color:var(--line);margin:0 10px;}
       <a href="#ventures">Life Projects</a>
       <a href="#contact">Contact</a>
     </div>
+    <button class="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#top"><span class="n">00</span>Top</a>
+  <a href="#about"><span class="n">01</span>About</a>
+  <a href="#impact"><span class="n">02</span>Career Milestones</a>
+  <a href="#experience"><span class="n">03</span>Experience</a>
+  <a href="#ventures"><span class="n">04</span>Life Projects</a>
+  <a href="#credentials"><span class="n">05</span>Education</a>
+  <a href="#interests"><span class="n">06</span>Interests</a>
+  <a href="#contact"><span class="n">07</span>Contact</a>
+</div>
 
 <noscript><style>.reveal{opacity:1!important;transform:none!important;filter:none!important;}.hero-text .eyebrow,.hero-text h1,.hero-text .lede,.hero-text .cta,.hero-photo{animation:none!important;}</style></noscript>
 <div class="progress" id="progress" aria-hidden="true"></div>
@@ -501,6 +542,7 @@ footer .sep{color:var(--line);margin:0 10px;}
 <script>
 document.getElementById('yr').textContent=new Date().getFullYear();
 const RM=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+const canParallax=!RM && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
 
 // choreographed reveals with per-row stagger
 const revs=[...document.querySelectorAll('.reveal')];
@@ -531,7 +573,7 @@ function frame(){
   const y=sc.scrollTop, vh=window.innerHeight;
   const max=sc.scrollHeight-vh;
   if(progress) progress.style.width=(max>0?Math.min(Math.max(y/max*100,0),100):0)+'%';
-  if(!RM && y<vh*1.4){
+  if(canParallax && y<vh*1.4){
     if(heroPhoto) heroPhoto.style.transform='translateY('+(y*0.10)+'px) scale('+(1+Math.min(y/5000,0.035))+')';
     if(heroText) heroText.style.transform='translateY('+(y*-0.045)+'px)';
   }
@@ -544,6 +586,24 @@ function onScroll(){ if(!tick){tick=true;requestAnimationFrame(()=>{frame();tick
 window.addEventListener('scroll',onScroll,{passive:true});
 window.addEventListener('resize',onScroll,{passive:true});
 frame();
+
+// mobile menu overlay
+const menuBtn=document.querySelector('.menu-btn');
+const mobileMenu=document.getElementById('mobileMenu');
+if(menuBtn&&mobileMenu){
+  const links=[...mobileMenu.querySelectorAll('a')];
+  function setMenu(open){
+    menuBtn.classList.toggle('open',open);
+    mobileMenu.classList.toggle('open',open);
+    menuBtn.setAttribute('aria-expanded',open);
+    document.body.style.overflow=open?'hidden':'';
+    if(open){links.forEach((a,i)=>a.style.transitionDelay=(0.05+i*0.04)+'s');}
+    else{links.forEach(a=>a.style.transitionDelay='0s');}
+  }
+  menuBtn.addEventListener('click',()=>setMenu(!mobileMenu.classList.contains('open')));
+  links.forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')setMenu(false);});
+}
 </script>
 </body>
 </html>
