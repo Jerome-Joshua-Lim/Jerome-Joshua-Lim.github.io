@@ -254,8 +254,8 @@ h2{font-family:var(--display);font-weight:700;font-size:clamp(26px,4.4vw,48px);l
 .icard p{font-size:14.5px;color:var(--ink-faint);margin:0;line-height:1.55;}
 
 /* ---------- about journey timeline ---------- */
-.journeys{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,64px);}
-@media(max-width:768px){.journeys{grid-template-columns:1fr;gap:0;}}
+.journeys{display:block;}
+.journey-col{max-width:640px;}
 .journey-eyebrow{font-size:12.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:clamp(44px,6vw,64px) 0 24px;}
 .journey{position:relative;padding-left:0;}
 .jline{position:absolute;left:7px;top:10px;bottom:10px;width:2px;background:var(--line);border-radius:2px;overflow:hidden;}
@@ -385,52 +385,18 @@ footer .sep{color:var(--line);margin:0 10px;}
 
     <div class="journeys">
       <div class="journey-col">
-        <div class="journey-eyebrow">Education</div>
-        <div class="journey">
-          <div class="jline"><span class="jline-fill"></span></div>
-          <ol class="jsteps">
-            <li class="jstep reveal"><span class="jnode"></span><div class="jbody">
-              <div class="jyear">2005</div>
-              <div class="jtitle">Singapore Polytechnic</div>
-              <div class="jdesc">Diploma in Aeronautical Engineering.</div>
-            </div></li>
-            <li class="jstep reveal"><span class="jnode"></span><div class="jbody">
-              <div class="jyear">2011</div>
-              <div class="jtitle">Nanyang Technological University</div>
-              <div class="jdesc">Bachelor of Business (Hons), minor in Entrepreneurship.</div>
-            </div></li>
-            <li class="jstep reveal"><span class="jnode"></span><div class="jbody">
-              <div class="jyear">2018</div>
-              <div class="jtitle">Florida State University</div>
-              <div class="jdesc">Master of Science, Instructional Systems &amp; Learning Technologies.</div>
-            </div></li>
-            <li class="jstep reveal"><span class="jnode"></span><div class="jbody">
-              <div class="jyear">2021</div>
-              <div class="jtitle">Goh Keng Swee Command &amp; Staff College</div>
-              <div class="jdesc">Command &amp; Staff Course. Awarded the Book Prize.</div>
-            </div></li>
-            <li class="jstep reveal"><span class="jnode"></span><div class="jbody">
-              <div class="jyear">2026</div>
-              <div class="jtitle">Singapore Management University</div>
-              <div class="jdesc">Master of Science, Entrepreneurship &amp; Innovation. Top graduate.</div>
-            </div></li>
-          </ol>
-        </div>
-      </div>
-
-      <div class="journey-col">
-        <div class="journey-eyebrow">Work</div>
+        <div class="journey-eyebrow">The journey</div>
         <div class="journey">
           <div class="jline"><span class="jline-fill"></span></div>
           <ol class="jsteps">
             <li class="jstep reveal"><span class="jnode"></span><div class="jbody">
               <div class="jyear">2001</div>
-              <div class="jtitle">Food &amp; Beverage Cook</div>
+              <div class="jtitle">Line Cook</div>
               <div class="jdesc">My first job, at sixteen, in the kitchens of Raffles Hotel and Pranzo Italian Restaurant, a start-up.</div>
             </div></li>
             <li class="jstep reveal"><span class="jnode"></span><div class="jbody">
               <div class="jyear">2003</div>
-              <div class="jtitle">CNC Machining</div>
+              <div class="jtitle">CNC Machinist</div>
               <div class="jdesc">At eighteen, programming CNC machines to manufacture precision-engineering parts.</div>
             </div></li>
             <li class="jstep reveal"><span class="jnode"></span><div class="jbody">
@@ -466,17 +432,17 @@ footer .sep{color:var(--line);margin:0 10px;}
             <li class="jstep reveal"><span class="jnode"></span><div class="jbody">
               <div class="jyear">2021</div>
               <div class="jtitle">Assistant Director, Operations Research &amp; Analytics Office</div>
-              <div class="jdesc">Singapore Armed Forces.</div>
+              <div class="jdesc">Joint Plans and Transformation Department, Singapore Armed Forces.</div>
             </div></li>
             <li class="jstep reveal"><span class="jnode"></span><div class="jbody">
               <div class="jyear">2022</div>
               <div class="jtitle">Co-founder, Cask &amp; Crown</div>
-              <div class="jdesc">Importing and distributing wine in Singapore.</div>
+              <div class="jdesc">Official distributor of Clos de Gat, Singapore.</div>
             </div></li>
             <li class="jstep reveal"><span class="jnode"></span><div class="jbody">
               <div class="jyear">2023</div>
               <div class="jtitle">Deputy Director, Operations Research &amp; Analytics Office</div>
-              <div class="jdesc">Singapore Armed Forces.</div>
+              <div class="jdesc">Joint Plans and Transformation Department, Singapore Armed Forces.</div>
             </div></li>
             <li class="jstep reveal"><span class="jnode"></span><div class="jbody">
               <div class="jyear">2025</div>
