@@ -253,6 +253,22 @@ h2{font-family:var(--display);font-weight:700;font-size:clamp(26px,4.4vw,48px);l
 .icard h5{font-family:var(--display);font-weight:600;font-size:19px;margin:0 0 8px;}
 .icard p{font-size:14.5px;color:var(--ink-faint);margin:0;line-height:1.55;}
 
+/* ---------- about journey timeline ---------- */
+.journeys{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,64px);}
+@media(max-width:768px){.journeys{grid-template-columns:1fr;gap:0;}}
+.journey-eyebrow{font-size:12.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:clamp(44px,6vw,64px) 0 24px;}
+.journey{position:relative;padding-left:0;}
+.jline{position:absolute;left:7px;top:10px;bottom:10px;width:2px;background:var(--line);border-radius:2px;overflow:hidden;}
+.jline-fill{display:block;width:100%;height:0;background:linear-gradient(180deg,var(--gold),var(--gold-soft));box-shadow:0 0 10px rgba(201,162,75,.5);transition:height .1s linear;}
+.jsteps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:clamp(28px,4.2vw,44px);}
+.jstep{position:relative;padding-left:44px;}
+.jnode{position:absolute;left:0;top:5px;width:16px;height:16px;border-radius:50%;background:var(--panel-2);border:2px solid var(--ink-faint);transition:background .35s var(--ease),border-color .35s,box-shadow .35s,transform .35s;}
+.jstep.passed .jnode{background:var(--gold);border-color:var(--gold);box-shadow:0 0 0 5px rgba(201,162,75,.15);transform:scale(1.06);}
+.jyear{font-family:var(--display);font-weight:700;font-size:clamp(22px,3vw,30px);line-height:1;color:var(--ink-faint);transition:color .35s;}
+.jstep.passed .jyear{color:var(--gold-soft);}
+.jtitle{font-weight:600;font-size:16.5px;color:var(--ink);margin:7px 0 4px;}
+.jdesc{font-size:14.5px;color:var(--ink-soft);line-height:1.6;max-width:48ch;}
+
 /* ---------- contact ---------- */
 #contact{text-align:center;border-bottom:none;
   background:radial-gradient(700px 400px at 50% 120%,rgba(201,162,75,.12),transparent 60%);}
@@ -365,6 +381,116 @@ footer .sep{color:var(--line);margin:0 10px;}
       <p>I did not start with much. I was working odd jobs by thirteen to help with the finances at home. While I was never the strongest student, I've been blessed to be awarded multiple SAF scholarships. This offered me opportunities for life-long learning, expanded thinking and considered perspectives. I learned early that where you start does not decide where you finish.</p>
       <p>My twenty years in the SAF have taught me how to be comfortable with ambiguity, gather very different views, and turn them into decisions people could act on. My career did not move in a straight line. While the peaks were pleasant, the troughs were where I've gained the most life lessons.</p>
       <p>Taking a gap year in 2025 was one of the best decisions of my life. I went all in to rediscover my identity. I completed SMU's <strong>Master of Entrepreneurship and Innovation</strong>, scouted deep-tech deals as a <strong>Venture Creator at Origgin Ventures</strong>, and started my life coaching practice. Now, I'm back to the Singapore Army with renewed purpose, leading the <strong>Army Safety Technology and Research Office</strong>.</p>
+    </div>
+
+    <div class="journeys">
+      <div class="journey-col">
+        <div class="journey-eyebrow">Education</div>
+        <div class="journey">
+          <div class="jline"><span class="jline-fill"></span></div>
+          <ol class="jsteps">
+            <li class="jstep reveal"><span class="jnode"></span><div class="jbody">
+              <div class="jyear">2005</div>
+              <div class="jtitle">Singapore Polytechnic</div>
+              <div class="jdesc">Diploma in Aeronautical Engineering.</div>
+            </div></li>
+            <li class="jstep reveal"><span class="jnode"></span><div class="jbody">
+              <div class="jyear">2011</div>
+              <div class="jtitle">Nanyang Technological University</div>
+              <div class="jdesc">Bachelor of Business (Hons), minor in Entrepreneurship.</div>
+            </div></li>
+            <li class="jstep reveal"><span class="jnode"></span><div class="jbody">
+              <div class="jyear">2018</div>
+              <div class="jtitle">Florida State University</div>
+              <div class="jdesc">Master of Science, Instructional Systems &amp; Learning Technologies.</div>
+            </div></li>
+            <li class="jstep reveal"><span class="jnode"></span><div class="jbody">
+              <div class="jyear">2021</div>
+              <div class="jtitle">Goh Keng Swee Command &amp; Staff College</div>
+              <div class="jdesc">Command &amp; Staff Course. Awarded the Book Prize.</div>
+            </div></li>
+            <li class="jstep reveal"><span class="jnode"></span><div class="jbody">
+              <div class="jyear">2026</div>
+              <div class="jtitle">Singapore Management University</div>
+              <div class="jdesc">Master of Science, Entrepreneurship &amp; Innovation. Top graduate.</div>
+            </div></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="journey-col">
+        <div class="journey-eyebrow">Work</div>
+        <div class="journey">
+          <div class="jline"><span class="jline-fill"></span></div>
+          <ol class="jsteps">
+            <li class="jstep reveal"><span class="jnode"></span><div class="jbody">
+              <div class="jyear">2001</div>
+              <div class="jtitle">Food &amp; Beverage Cook</div>
+              <div class="jdesc">My first job, at sixteen, in the kitchens of Raffles Hotel and Pranzo Italian Restaurant, a start-up.</div>
+            </div></li>
+            <li class="jstep reveal"><span class="jnode"></span><div class="jbody">
+              <div class="jyear">2003</div>
+              <div class="jtitle">CNC Machining</div>
+              <div class="jdesc">At eighteen, programming CNC machines to manufacture precision-engineering parts.</div>
+            </div></li>
+            <li class="jstep reveal"><span class="jnode"></span><div class="jbody">
+              <div class="jyear">2006</div>
+              <div class="jtitle">Platoon Commander</div>
+              <div class="jdesc">Singapore Army. My first command, at twenty-one.</div>
+            </div></li>
+            <li class="jstep reveal"><span class="jnode"></span><div class="jbody">
+              <div class="jyear">2009</div>
+              <div class="jtitle">Founder, cheesecake bakery</div>
+              <div class="jdesc">Started a small bakery in my second year at Nanyang Business School.</div>
+            </div></li>
+            <li class="jstep reveal"><span class="jnode"></span><div class="jbody">
+              <div class="jyear">2010</div>
+              <div class="jtitle">Front Desk, InterContinental Singapore</div>
+              <div class="jdesc">At twenty-five, guest service at a luxury hotel.</div>
+            </div></li>
+            <li class="jstep reveal"><span class="jnode"></span><div class="jbody">
+              <div class="jyear">2011</div>
+              <div class="jtitle">Singapore Armed Forces</div>
+              <div class="jdesc">Began full-time service after graduating.</div>
+            </div></li>
+            <li class="jstep reveal"><span class="jnode"></span><div class="jbody">
+              <div class="jyear">2013</div>
+              <div class="jtitle">Battery Commander</div>
+              <div class="jdesc">At twenty-eight, led and developed over 60 soldiers; contributed to a Best Artillery Unit result.</div>
+            </div></li>
+            <li class="jstep reveal"><span class="jnode"></span><div class="jbody">
+              <div class="jyear">2017</div>
+              <div class="jtitle">Training Development Officer</div>
+              <div class="jdesc">HQ Singapore Artillery. Redesigned officer leadership training.</div>
+            </div></li>
+            <li class="jstep reveal"><span class="jnode"></span><div class="jbody">
+              <div class="jyear">2021</div>
+              <div class="jtitle">Assistant Director, Operations Research &amp; Analytics Office</div>
+              <div class="jdesc">Singapore Armed Forces.</div>
+            </div></li>
+            <li class="jstep reveal"><span class="jnode"></span><div class="jbody">
+              <div class="jyear">2022</div>
+              <div class="jtitle">Co-founder, Cask &amp; Crown</div>
+              <div class="jdesc">Importing and distributing wine in Singapore.</div>
+            </div></li>
+            <li class="jstep reveal"><span class="jnode"></span><div class="jbody">
+              <div class="jyear">2023</div>
+              <div class="jtitle">Deputy Director, Operations Research &amp; Analytics Office</div>
+              <div class="jdesc">Singapore Armed Forces.</div>
+            </div></li>
+            <li class="jstep reveal"><span class="jnode"></span><div class="jbody">
+              <div class="jyear">2025</div>
+              <div class="jtitle">Venture Creator, Origgin Ventures</div>
+              <div class="jdesc">At forty, a deep-tech venture capital firm. Secured a SGD $300k SMART grant for a medical-technology venture.</div>
+            </div></li>
+            <li class="jstep reveal"><span class="jnode"></span><div class="jbody">
+              <div class="jyear">2026</div>
+              <div class="jtitle">Head, Army Safety Technology &amp; Research Office</div>
+              <div class="jdesc">Army Safety Inspectorate. Also founded Coach Kai and Wine with Kai.</div>
+            </div></li>
+          </ol>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -568,6 +694,7 @@ const secList=dotEls.map(a=>({a,el:document.getElementById(a.getAttribute('href'
 const progress=document.getElementById('progress');
 const heroPhoto=document.querySelector('.hero-photo');
 const heroText=document.querySelector('.hero-text');
+const journeys=[...document.querySelectorAll('.journey')].map(j=>({el:j,fill:j.querySelector('.jline-fill'),steps:[...j.querySelectorAll('.jstep')]}));
 function frame(){
   const sc=document.scrollingElement||document.documentElement;
   const y=sc.scrollTop, vh=window.innerHeight;
@@ -577,6 +704,13 @@ function frame(){
     if(heroPhoto) heroPhoto.style.transform='translateY('+(y*0.10)+'px) scale('+(1+Math.min(y/5000,0.035))+')';
     if(heroText) heroText.style.transform='translateY('+(y*-0.045)+'px)';
   }
+  const trig=vh*0.62;
+  journeys.forEach(J=>{
+    const jr=J.el.getBoundingClientRect();
+    const passed=Math.min(Math.max(trig-jr.top,0),jr.height);
+    if(J.fill) J.fill.style.height=(jr.height>0?(passed/jr.height*100):0)+'%';
+    J.steps.forEach(st=>{st.classList.toggle('passed', st.getBoundingClientRect().top<trig);});
+  });
   const centre=y+vh*0.4; let cur=secList[0];
   for(const o of secList){ if(o.el.offsetTop<=centre) cur=o; }
   dotEls.forEach(a=>a.classList.remove('active')); if(cur) cur.a.classList.add('active');
